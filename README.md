@@ -1,6 +1,7 @@
 # OOP-Project-Team-5
 
 OVERVIEW
+
 Maze Escape is a maze-solving game that challenges players to navigate through a maze, collecting items for points, avoiding obstacles, and finding the exit all within a given time.
  
 These are a few key features of the game:
