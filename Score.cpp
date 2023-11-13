@@ -1,5 +1,5 @@
 class Score {
-    private:
+    protected:
         int score;
     public:
         Score()
