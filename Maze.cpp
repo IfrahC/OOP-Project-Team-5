@@ -1,68 +1,57 @@
-
-#include <string>
-#include <vector>
-#include <stack>
-#include <ctime>
-#include <cstdlib>
+#include "Maze.h"
 #include <iostream>
+#include <vector>
+#include <stdlib.h>
 
-#define N 12
-class Maze {
-    public:
-    Maze();
-    void print_maze();  
-    std::vector<std::vector< int>> get_all_neighbors(int i, int j);
-    void generate_maze();
-
-    int start_x; // X-coordinate of the starting point
-    int start_y; // Y-coordinate of the starting point
-
-    int exit_x;  // X-coordinate of the exit point
-    int exit_y;  // Y-coordinate of the exit point
-
-    std::vector<std::vector<Cell>> grids{N, std::vector<Cell>(N)};
-};
-
-Maze::Maze() {
-
-    // Define the fixed starting and exit points
+Maze::Maze(int m_gridSize, int windowWidth, int windowHeight, SDL_Renderer* m_renderer) {
     start_x = 0;
     start_y = 0;
-    exit_x = N - 1;
-    exit_y = N - 1;
-
-    for (int i = 0; i < N; ++i) {
-        for (int j = 0; j < N; ++j) {
-            grids[i][j] = Cell(i, j);
-            std::cout<<i<<" "<<j<<std::endl;
+    exit_x = m_gridSize - 1;
+    exit_y = m_gridSize - 1;
+    scale = windowWidth/m_gridSize;
+    gridSize=m_gridSize;
+    renderer=m_renderer;
+    for (int i = 0; i < gridSize; ++i) {
+        std::vector<Cell> a;
+        grids.push_back(a);
+        for (int j = 0; j < gridSize; ++j) {
+            
+            grids[i].push_back( Cell());
+            grids[i][j] .i=i;
+            grids[i][j] .j=j;
+            grids[i][j] .x=i*this->scale;
+            grids[i][j] .y=j*this->scale;
+            grids[i][j].scale=this->scale;
+            grids[i][j].renderer=this->renderer;
         }
     }
+    //constructor
 }
 
 std::vector<std::vector<int>> Maze::get_all_neighbors(int i, int j) {
     std::vector<int> co_ordinates; 
     std::vector<std::vector<int>> valid_neighbors;
 
-    if ((i >= 0 && i < N) && (j + 1 >= 0 && j + 1 < N) && (!grids[i][j + 1].visited)) {
-      
+    if ((i >= 0 && i < gridSize) && (j + 1 >= 0 && j + 1 < gridSize) && (!grids[i][j + 1].visited)) {
         co_ordinates={i,j+1};
         valid_neighbors.push_back(co_ordinates);
     }
-    if ((i >= 0 && i < N) && (j - 1 >= 0 && j - 1 < N) && (!grids[i][j - 1].visited)) {
+    if ((i >= 0 && i < gridSize) && (j - 1 >= 0 && j - 1 < gridSize) && (!grids[i][j - 1].visited)) {
      
         co_ordinates={i,j-1};
         valid_neighbors.push_back(co_ordinates);
     }
-    if ((i - 1 >= 0 && i - 1 < N) && (j >= 0 && j < N) && (!grids[i - 1][j].visited)) {
-      
+    if ((i - 1 >= 0 && i - 1 < gridSize) && (j >= 0 && j < gridSize) && (!grids[i - 1][j].visited)) {
+
         co_ordinates={i-1,j};
         valid_neighbors.push_back(co_ordinates);
     }
-    if ((i + 1 >= 0 && i + 1 < N) && (j >= 0 && j < N) && (!grids[i + 1][j].visited)) {
- 
+    if ((i + 1 >= 0 && i + 1 < gridSize) && (j >= 0 && j < gridSize) && (!grids[i + 1][j].visited)) {
+  
         co_ordinates={i+1,j};
         valid_neighbors.push_back(co_ordinates);
     }
 
     return valid_neighbors;
 }
+
