@@ -1,25 +1,18 @@
-class Cell {
-    public:
-    Cell() = default;
-    Cell(int i, int j);
-    bool eastwalls;
-    bool westwalls;
-    bool northwalls;
-    bool southwalls;
-    int x;
-    int y;
-    bool visited;
-};
-Cell::Cell(int i, int j)
-    : x(i), y(j), visited(false) {
+#include "Cell.h"
+Cell::Cell()
+ {
     eastwalls=true;
     westwalls=true;
     northwalls=true;
-    southwalls=true;}
+    southwalls=true;
+    visited=false;
+}
 
- Cell& Cell::operator=(const Cell& c) const {
+const Cell& Cell::operator=(const Cell& c) {
     x = c.x;
     y = c.y;
+    i=c.i;
+    j=c.j;
     visited = c.visited;
     eastwalls=c.eastwalls;
     westwalls=c.westwalls;
@@ -30,14 +23,14 @@ Cell::Cell(int i, int j)
 }
 
 std::string Cell::direction(const Cell& other) {
-    if (x == other.x && y + 1 == other.y)
-        return "E";
-    if (x == other.x && y - 1 == other.y)
-        return "W";
-    if (x - 1 == other.x && y == other.y)
-        return "N";
-    if (x + 1 == other.x && y == other.y)
+    if (i == other.i && j + 1 == other.j)
         return "S";
+    if (i == other.i && j- 1 == other.j)
+        return "N";
+    if (i - 1 == other.i && j == other.j)
+        return "W";
+    if (i + 1 == other.i && j == other.j)
+        return "E";
     return "";
 }
 std::string Cell::directionopposite(std::string direct) {
@@ -50,4 +43,25 @@ std::string Cell::directionopposite(std::string direct) {
     else if (direct=="N")
         {return "S";}
     return "";
+}
+void Cell::drawCell(SDL_Color color) {
+    //std::cout<<i<<","<<j<<std::endl;
+    // Set render color
+    SDL_SetRenderDrawColor(this->renderer, color.r ,color.g, color.b, color.a);
+
+    if(eastwalls==true){
+        SDL_RenderDrawLine(this->renderer, x+scale, y, x+scale, y+scale);
+    }
+    if(westwalls==true){
+        SDL_RenderDrawLine(this->renderer, x, y, x, y+scale);
+    }
+    if(northwalls==true){
+        SDL_RenderDrawLine(this->renderer, x, y, x+scale, y);
+    }
+    if(southwalls==true){
+        SDL_RenderDrawLine(this->renderer, x, y+scale, x+scale, y+scale);
+    }
+
+    // Render the walls to the screen
+    SDL_RenderPresent(this->renderer);
 }
