@@ -1,52 +1,45 @@
 #include<iostream>
 #include "collectables.hpp"
+#include "Score.cpp"
 #include <vector>
 using namespace std;
 
 // Define a Collectible class
 class Collectible {
-public:
-    SDL_Texture* texture;
-    SDL_Rect position;
+    public:
+        SDL_Texture* texture;
+        SDL_Rect position;
+        //pure virtual function score incrementation
+        virtual int updateScore() const = 0;
 
-    // Load the image into the texture
-    void loadTexture(SDL_Renderer* renderer, const char* path) {
-        SDL_Surface* surface = IMG_Load(path);
-        texture = SDL_CreateTextureFromSurface(renderer, surface);
-        SDL_FreeSurface(surface);
-    }
+        // Load the image into the texture
+        void loadTexture(SDL_Renderer* renderer, const char* path) {
+            SDL_Surface* surface = IMG_Load(path);
+            texture = SDL_CreateTextureFromSurface(renderer, surface);
+            SDL_FreeSurface(surface);
+        }
 
-    // Render the collectible object
-    void render(SDL_Renderer* renderer) {
-        SDL_RenderCopy(renderer, texture, NULL, &position);
-    }
+        // Render the collectible object
+        void render(SDL_Renderer* renderer) {
+            SDL_RenderCopy(renderer, texture, NULL, &position);
+        }
 
-    // Check for collision with the player
-    bool checkCollision(SDL_Rect player) {
-        return SDL_HasIntersection(&position, &player);
-    }
+        // Check for collision with the player
+        bool checkCollision(SDL_Rect player) {
+            return SDL_HasIntersection(&position, &player);
+        }
 };
 
-// Usage example in your game loop
-Collectible coin;
-coin.loadTexture(gRenderer, "coin.png"); // Load the coin texture
+class Coin : public Collectible {
+    public:
+        int updateScore() const override {
 
-// Set the position of the coin
-coin.position.x = 100;
-coin.position.y = 100;
-coin.position.w = /* width */;
-coin.position.h = /* height */;
+        }
+};
 
-// Inside your rendering loop
-// Render the collectible object
-coin.render(gRenderer);
+class Diamond : public Collectible {
 
-// Check for collision with the player's position (playerPos is the player's SDL_Rect)
-if (coin.checkCollision(playerPos)) {
-    // The player collected the coin!
-    // Handle this event (e.g., increase score, remove the coin from the scene, etc.)
 }
-
 
 // Unit pigeon = {{7, 88, 155, 103}, {30, 40, 50, 50}};
 // Unit butterfly = {{257, 24, 173, 134}, {30, 40, 50, 50}};
@@ -152,4 +145,4 @@ if (coin.checkCollision(playerPos)) {
 //     }
 
 //     std::cout<<"Mouse clicked at: "<<x<<" -- "<<y<<std::endl; // Print mouse coorddinates
-// }
+// };
