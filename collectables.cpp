@@ -10,7 +10,7 @@ class Collectible {
         SDL_Texture* texture;
         SDL_Rect position;
         //pure virtual function score incrementation
-        virtual int updateScore(Score score) const = 0;
+        virtual int updateScore(Score& score) = 0;
 
         // Load the image into the texture
         void loadTexture(SDL_Renderer* renderer, const char* path) {
@@ -32,14 +32,14 @@ class Collectible {
 
 class Coin : public Collectible {
     public:
-        int updateScore(Score score) const override {
+        int updateScore(Score& score) override {
             ++score;
         }
 };
 
 class Diamond : public Collectible {
     public:
-        int updateScore(Score score) const override {
+        int updateScore(Score& score) override {
             score+=5;
         }
 };
