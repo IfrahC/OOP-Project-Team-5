@@ -33,12 +33,15 @@ class Collectible {
 class Coin : public Collectible {
     public:
         int updateScore(int s) const override {
-            score++;
+            s++;
         }
 };
 
 class Diamond : public Collectible {
-
+    public:
+        int updateScore(int s) const override {
+            s+=5;
+        }
 }
 
 // Unit pigeon = {{7, 88, 155, 103}, {30, 40, 50, 50}};
@@ -145,4 +148,4 @@ class Diamond : public Collectible {
 //     }
 
 //     std::cout<<"Mouse clicked at: "<<x<<" -- "<<y<<std::endl; // Print mouse coorddinates
-// };
+// }
