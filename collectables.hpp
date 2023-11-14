@@ -1,4 +1,5 @@
 #include<SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 
 void drawObjects(SDL_Renderer* gRnderer, SDL_Texture* assets);
