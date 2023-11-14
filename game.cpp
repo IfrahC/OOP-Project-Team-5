@@ -1,4 +1,5 @@
 #include "game.hpp"
+#include "collectables.hpp"
 //#include "HUMania.hpp"
 bool Game::init()
 {
