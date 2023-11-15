@@ -1,7 +1,7 @@
 #include <iostream>
 #include "collectables.hpp"
 #include "Score.cpp"
-#include <vector>
+//#include <vector>
 using namespace std;
 
 // Define a Collectible class
