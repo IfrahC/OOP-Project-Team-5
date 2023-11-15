@@ -1,3 +1,7 @@
+// game.cpp
+#include "game.hpp"
+#include <iostream>
+
 Game::Game(int size):mazeSize{size}{}
 bool Game::init()
 {
@@ -58,31 +62,26 @@ bool Game::init()
 
 bool Game::loadMedia()
 {
-	// Loading success flag
-	bool success = true;
 
-	
 
-    this->titleTexture = loadTexture("Start Page 2.png");
-    if (this->titleTexture == nullptr) {
-    printf ("Failed to create texture from title image! SDL Error: " , SDL_GetError());
-    success=false;
-    }
-	this->mazebgTexture = loadTexture("soil.png");
-    if (this->mazebgTexture == nullptr) {
-    printf ("Failed to create texture from title image! SDL Error: " , SDL_GetError());
-    success=false;
+	  titleTexture.texture=titleTexture.load(gRenderer, "Start Page 2.png");
+    if (titleTexture.texture == nullptr) {
+        std::cerr << "Failed to create texture from title image!" << std::endl;
+        return false;
     }
 
-	return success;
+    mazebgTexture.texture=mazebgTexture.load(gRenderer, "soil.png");
+    if (mazebgTexture.texture== nullptr) {
+        std::cerr << "Failed to create texture from maze background image!" << std::endl;
+        return false;
+    }
+
+    return true;
 }
 
 void Game::close()
 {
 	delete generator;
-
-    SDL_DestroyTexture(this->titleTexture);
-	SDL_DestroyTexture(this->mazebgTexture);
 
 	// Destroy window
 	SDL_DestroyRenderer(gRenderer);
@@ -94,32 +93,6 @@ void Game::close()
 	SDL_Quit();
 }
 
-SDL_Texture *Game::loadTexture(std::string path)
-{
-	// The final texture
-	SDL_Texture *newTexture = NULL;
-
-	// Load image at specified path
-	SDL_Surface *loadedSurface = IMG_Load(path.c_str());
-	if (loadedSurface == NULL)
-	{
-		printf("Unable to load image %s! SDL_image Error: %s\n", path.c_str(), IMG_GetError());
-	}
-	else
-	{
-		// Create texture from surface pixels
-		newTexture = SDL_CreateTextureFromSurface(gRenderer, loadedSurface);
-		if (newTexture == NULL)
-		{
-			printf("Unable to create texture from %s! SDL Error: %s\n", path.c_str(), SDL_GetError());
-		}
-
-		// Get rid of old loaded surface
-		SDL_FreeSurface(loadedSurface);
-	}
-
-	return newTexture;
-}
 void Game::run() {
     bool quit = false;
     SDL_Event e;
@@ -132,7 +105,7 @@ void Game::run() {
 
     // Display title screen
 	
-    SDL_RenderCopy(gRenderer, titleTexture, nullptr, nullptr);
+    SDL_RenderCopy(gRenderer, titleTexture.texture, nullptr, nullptr);
     SDL_RenderPresent(gRenderer);
     SDL_Delay(2000);  // Display title screen for 2 seconds
 
@@ -142,7 +115,7 @@ void Game::run() {
     SDL_RenderClear(gRenderer);
     SDL_RenderPresent(gRenderer);
 
-	SDL_RenderCopy(gRenderer, mazebgTexture, nullptr, nullptr);
+	SDL_RenderCopy(gRenderer, mazebgTexture.texture, nullptr, nullptr);
     SDL_RenderPresent(gRenderer);
     generator = new Maze(mazeSize, SCREEN_WIDTH, SCREEN_HEIGHT, gRenderer);
     generator->generate_maze();
@@ -162,3 +135,6 @@ void Game::run() {
         
     }
 }
+
+
+
