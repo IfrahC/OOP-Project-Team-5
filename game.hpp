@@ -4,18 +4,35 @@
 
 #include "include/SDL2/SDL.h"
 #include "Maze.h"
+#include "include/SDL2/SDL_image.h"
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#include <stdlib.h>
+#include <time.h>
 
 class Game {
-public:
-    Game(int winWidth, int winHeight);
-    ~Game();
+ 
+    const int SCREEN_WIDTH = 800;
+    const int SCREEN_HEIGHT = 800;
 
-    void runGameLoop();
+    // The window we'll be rendering to
+    SDL_Window *gWindow = NULL;
+    // The window renderer
+    SDL_Renderer *gRenderer = NULL;
 
-private:
-    SDL_Window* window;
-    SDL_Renderer* renderer;
     Maze* generator;
+    int mazeSize;
+    SDL_Texture* titleTexture;  
+    SDL_Texture* mazebgTexture;
+
+public:
+    Game(int size);
+    bool init();
+    bool loadMedia();
+    void close();
+    SDL_Texture *loadTexture(std::string path);
+    void run();
 };
 
 #endif // GAME_H
