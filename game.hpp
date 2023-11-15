@@ -4,6 +4,7 @@
 
 #include "include/SDL2/SDL.h"
 #include "Maze.h"
+#include "Texture.hpp"
 #include "include/SDL2/SDL_image.h"
 #include <stdio.h>
 #include <iostream>
@@ -23,15 +24,17 @@ class Game {
 
     Maze* generator;
     int mazeSize;
-    SDL_Texture* titleTexture;  
-    SDL_Texture* mazebgTexture;
+    /*SDL_Texture* titleTexture;  
+    SDL_Texture* mazebgTexture;*/
+    Texture titleTexture;
+    Texture mazebgTexture;
 
 public:
     Game(int size);
     bool init();
     bool loadMedia();
     void close();
-    SDL_Texture *loadTexture(std::string path);
+   // SDL_Texture *loadTexture(std::string path);
     void run();
 };
 
