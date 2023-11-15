@@ -5,14 +5,49 @@
 bool loadMusic()
 {
 	//Loading success flag
+	bool success = true; //if loading successful
+
+    Mix_Music *bgMusic = NULL; //pointer of type mix_music declared and innitialized to null
+
+	bgMusic = Mix_LoadMUS( "filename" ); 
+
+	if(bgMusic == NULL)
+    {
+		printf("Unable to load music: %s \n", Mix_GetError());
+		success = false;
+	}
+	return success;
+}
+
+bool loadCoin()
+{
+	//Loading success flag
 	bool success = true;
 
-    Mix_Music *bgMusic = NULL;
+    Mix_Coin *coin = NULL;
 
-	bgMusic = Mix_LoadMUS( "filename" );
+	coin = Mix_LoadCoin( "filename" );
 
-	if(bgMusic == NULL){
-		printf("Unable to load music: %s \n", Mix_GetError());
+	if(coin == NULL)
+    {
+		printf("Unable to load sound: %s \n", Mix_GetError());
+		success = false;
+	}
+	return success;
+}
+
+bool loadDiamond()
+{
+	//Loading success flag
+	bool success = true;
+
+    Mix_Diamond *diamond = NULL;
+
+	diamond = Mix_LoadDiamond( "filename" );
+
+	if(diamond == NULL)
+    {
+		printf("Unable to load sound: %s \n", Mix_GetError());
 		success = false;
 	}
 	return success;
@@ -20,7 +55,10 @@ bool loadMusic()
 
 bool initMixer()
 {
+    bool success = true;
+
     Mix_init(MIX_INIT_MP3);
+    SDL_Init(SDL_INIT_AUDIO);
 
     if( Mix_OpenAudio( 44100, MIX_DEFAULT_FORMAT, 2, 2048 ) < 0 )
     {
@@ -35,6 +73,10 @@ void close()
     //destroy window
     Mix_FreeMusic(bgMusic);
 	bgMusic = NULL;
+    Mix_FreeCoin(coin);
+    coin = NULL;
+    Mix_FreeDiamond(diamond);
+    diamond = NULL;
 
     //quit SDL subsystems
     Mix_Quit();
