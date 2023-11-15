@@ -14,11 +14,12 @@ public:
     virtual int updateScore(Score &score) = 0;
 
     // Check for collision with the player
-    virtual bool checkCollision(SDL_Rect player)
-    {
+    virtual bool checkCollision(SDL_Rect player) = 0;
+};
+
+bool Collectible::checkCollision(SDL_Rect player) {
         return SDL_HasIntersection(&position, &player);
     }
-};
 
 class Coin : public Collectible
 {
