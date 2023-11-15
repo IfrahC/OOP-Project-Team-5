@@ -24,8 +24,7 @@ class Game {
 
     Maze* generator;
     int mazeSize;
-    /*SDL_Texture* titleTexture;  
-    SDL_Texture* mazebgTexture;*/
+    
     Texture titleTexture;
     Texture mazebgTexture;
 
