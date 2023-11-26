@@ -14,22 +14,22 @@
 
 class Collectible {
 public:
-    virtual void collect(Score &score) = 0; // Pure virtual function
-    virtual void show();
-    virtual ~Collectible();
+    virtual void collect(Score &score) = 0; // Pure virtual function, 
+    virtual void show(); 
+    virtual ~Collectible(); //destructor
 };
 
 class Coin : public Collectible {
 public:
     Coin();
-    void collect(Score &score);
+    void collect(Score &score); //increment 2 in the overall score
     void show();
 };
 
 class Diamond : public Collectible {
 public:
     Diamond();
-    void collect(Score &score);
+    void collect(Score &score); //incrememt 5 in the overall score
     void show();
     
 };
