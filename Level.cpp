@@ -10,6 +10,7 @@ int Level::getMazeSize() const {
 }
 
 void Level::setMazeSize(Difficulty difficulty) {
+    //setting mazesize based upon the difficulty chosen
     switch (difficulty) {
         case Easy:
             mazeSize = 10;  
@@ -19,9 +20,6 @@ void Level::setMazeSize(Difficulty difficulty) {
             break;
         case Hard:
             mazeSize = 20;  
-            break;
-        case Hardest:
-            mazeSize = 25;
             break;
 
        
