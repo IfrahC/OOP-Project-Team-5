@@ -8,8 +8,9 @@ private:
 
 public:
     Score();
-    int getscore() const;
-    void incrementscore(int n);
+    int setscore(int a); //setter
+    int getscore() const; //getter
+    void incrementscore(int n); //increments the score by provided value
 };
 
 #endif // SCORE_HPP
