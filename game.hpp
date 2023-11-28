@@ -34,7 +34,7 @@ class Game {
     // The window renderer
     SDL_Renderer *gRenderer = NULL;
 
-    GameManager m;
+    GameManager manager;
  
     Maze* generator; //the maze
     //music
