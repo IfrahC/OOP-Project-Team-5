@@ -323,9 +323,9 @@ void Game::run() { //main game loop is within it
 			else if(e.type == SDL_KEYDOWN && gameState=="Running")	{
 				//if game is running m which is the gamemanager will handle the conditions of the movement of the player
 				if (player==0){
-				gameState=m.move(gRenderer, e.key.keysym.sym,mazebgTexture,generator,boy,points,gameState,collectiblemusic,backgroundMusic);}
+				gameState=manager.move(gRenderer, e.key.keysym.sym,mazebgTexture,generator,boy,points,gameState,collectiblemusic,backgroundMusic);}
 				else{
-					gameState=m.move(gRenderer, e.key.keysym.sym,mazebgTexture,generator,girl,points,gameState,collectiblemusic,backgroundMusic);
+					gameState=manager.move(gRenderer, e.key.keysym.sym,mazebgTexture,generator,girl,points,gameState,collectiblemusic,backgroundMusic);
 				}
             
             }
