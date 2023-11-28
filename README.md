@@ -25,8 +25,7 @@ Maze Escape is a game development project in which we aim to tackle input handli
  
 GROUP MEMBERS:
 1. Eeshal Khalid Nadeem Qureshi
-2. Namel Shahid
-3. Ifrah Chishti
-4. Aiman Rizwan
+2. Ifrah Chishti
+3. Aiman Rizwan
    
 We plan to divide the tasks equally as we go along our project. The workload and responsibilities will be split between the four members. All of us will be engaging and giving our input wherever we find suitable.
