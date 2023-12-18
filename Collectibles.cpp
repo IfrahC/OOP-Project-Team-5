@@ -1,15 +1,23 @@
-#pragma once
+
 #include "Collectibles.hpp"
-Collectible::~Collectible()=default;
-Coin::Coin(){ };
-void Coin::collect(Score &score){
-      score.incrementscore(2)  ; //increments two in the overall score if a coin is collected
+Collectible::~Collectible() = default;
+Coin::Coin(){};
+Diamond::Diamond(){};
+
+Coin::~Coin() {  }
+Diamond::~Diamond() {  }
+
+void Coin::collect(Score &score)
+{
+      // increments two in the overall score if a coin is collected
+      score = score + 2;
 }
-void Diamond::collect(Score &score){
-        score.incrementscore(5); //increments 5 in the overall score if a diamond is collected
+void Diamond::collect(Score &score)
+{
+      // increments 5 in the overall score if a diamond is collected
+      score = score + 5;
 }
 
-Diamond::Diamond(){};
-void Coin::show(){std::cout<<"coin";}
-void Diamond::show(){std::cout<<"diamond";}
-void Collectible::show(){}
+void Coin::show() { std::cout << "coin"; }
+void Diamond::show() { std::cout << "diamond"; }
+void Collectible::show() {}

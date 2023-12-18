@@ -1,21 +1,21 @@
 // texture.hpp
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#ifndef TEXTURE_HPP
+#define TEXTURE_HPP
 
-#include "include/SDL2/SDL.h"
-#include "include/SDL2/SDL_image.h"
+#include <SDL.h>
+#include <SDL_image.h>
 #include <string>
 
-class Texture {
+class Texture
+{
 public:
     Texture();
     ~Texture();
 
-    SDL_Texture* load(SDL_Renderer* renderer, const std::string& path);
+    SDL_Texture *load(SDL_Renderer *renderer, const std::string &path);
     void destroy();
 
-    SDL_Texture* texture;
+    SDL_Texture *texture;
 };
 
-#endif // TEXTURE_H
-
+#endif // TEXTURE_HPP

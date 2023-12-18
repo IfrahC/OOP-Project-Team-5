@@ -1,15 +1,17 @@
 // texture.cpp
-#include "texture.hpp"
+#include "Texture.hpp"
 #include <iostream>
 
 Texture::Texture() : texture(nullptr) {}
 
-Texture::~Texture() {
-    destroy();
+Texture::~Texture()
+{
+	destroy();
 }
 
-SDL_Texture* Texture::load(SDL_Renderer* gRenderer, const std::string& path) {
- 
+SDL_Texture *Texture::load(SDL_Renderer *gRenderer, const std::string &path)
+{
+
 	// The final texture
 	SDL_Texture *newTexture = NULL;
 
@@ -35,13 +37,12 @@ SDL_Texture* Texture::load(SDL_Renderer* gRenderer, const std::string& path) {
 	return newTexture;
 }
 
-void Texture::destroy() {
+void Texture::destroy()
+{
     
-    if (texture != nullptr) {
-        SDL_DestroyTexture(texture);
-        texture = nullptr;
-    }
+	if (texture != nullptr)
+	{
+		SDL_DestroyTexture(texture);
+		texture = nullptr;
+	}
 }
-
-
-

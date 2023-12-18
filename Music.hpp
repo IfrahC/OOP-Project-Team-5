@@ -1,20 +1,22 @@
-#ifndef MUSIC_H
-#define MUSIC_H
+
+#pragma once
 #include <SDL.h>
 #include <SDL_mixer.h>
+#include <iostream>
 
-class Music {
+class Music
+{
 public:
-    Music(); //constructor
-    ~Music(); //destructor
+    Music();
+    ~Music();
 
-    bool init(); //initializer
-    bool loadMusic(const char* path); //loading music
-    void play(int loops); //playing music
-    void close(); //closing music
+    bool init();
+    bool loadBackgroundMusic(const char *path);
+
+    void playBackgroundMusic(int loops);
+
+    void close();
 
 private:
-    Mix_Music* music;
+    Mix_Music *backgroundMusic; // For background music
 };
-
-#endif // MUSIC_H
